@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.saraiva</groupId>
+		<artifactId>books</artifactId>
+		<version>${application.version}</version>
+	</parent>
+
+	<artifactId>books-ear</artifactId>
+	<packaging>ear</packaging>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>books-dao</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>books-ws</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>books-negocio</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>books-commons</artifactId>
+			<version>${project.version}</version>
+		
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>${maven.ear.plugin.version}</version>
+
+				<configuration>
+					<skinnyWars>true</skinnyWars>
+					<outputFileNameMapping>@{artifactId}@-@{version}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>
+					<defaultLibBundleDir>/lib/</defaultLibBundleDir>
+				
+					<modules>
+					
+						<webModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>books-ws</artifactId>
+							<contextRoot>/books</contextRoot>
+						</webModule>
+						
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>books-negocio</artifactId>
+						</ejbModule>
+						
+						<jarModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>books-commons</artifactId>
+						</jarModule>
+						
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
