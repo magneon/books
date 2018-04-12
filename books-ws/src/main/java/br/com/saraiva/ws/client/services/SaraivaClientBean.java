@@ -102,5 +102,5 @@ public class SaraivaClientBean {
 	public List<Book> consultaLivrosPor(@QueryParam("price") Integer price, @QueryParam("limit") Integer limit) {
 		return serviceBook.procuraLivrosPor(price, limit);
 	}
-
+	
 }

@@ -16,6 +16,7 @@
 
 	<dependencies>
 	
+		<!-- Dependência do Hibernate para JPA 2.0 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -27,6 +28,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- Dependência do MongoDB -->
+	    <dependency>
+	        <groupId>org.mongodb</groupId>
+	        <artifactId>mongodb-driver</artifactId>
+	        <version>3.6.3</version>
+	    </dependency>
 
 	</dependencies>
 

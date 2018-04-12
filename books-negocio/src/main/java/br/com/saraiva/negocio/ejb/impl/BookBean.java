@@ -16,11 +16,11 @@ import br.com.saraiva.negocio.ejb.BookService;
 public class BookBean implements BookService {
 	
 	@EJB
-	private BookDAOService serviceDAOBook;
-
+	private BookDAOService serviceBookDAO;
+	
 	@Override
 	public void gravaLivroNoBanco(BookResponse bookResponse) throws ProdutoJaExisteException {
-		Book book = serviceDAOBook.pegaLivroPor(Integer.valueOf(bookResponse.getSku()));
+		Book book = serviceBookDAO.pegaLivroPor(Integer.valueOf(bookResponse.getSku()));
 		
 		if (book == null) {
 			book = new Book();
@@ -37,23 +37,23 @@ public class BookBean implements BookService {
 			throw new ProdutoJaExisteException("O livro solicitado já existe no banco de dados!");
 		}
 		
-		serviceDAOBook.salva(book);
+		serviceBookDAO.salva(book);
 		
 	}
-
+	
 	@Override
 	public void removeLivroDoBanco(Integer sku) {
-		serviceDAOBook.remove(sku);
+		serviceBookDAO.remove(sku);
 	}
 
 	@Override
 	public Book procuraLivroPor(Integer sku) {
-		return serviceDAOBook.pegaLivroPor(sku);
+		return serviceBookDAO.pegaLivroPor(sku);
 	}
 
 	@Override
 	public List<Book> procuraLivrosPor(Integer price, Integer limit) {
-		return serviceDAOBook.procuraLivrosPor(price, limit);
+		return serviceBookDAO.procuraLivrosPor(price, limit);
 	}
 
 }

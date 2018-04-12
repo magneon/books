@@ -8,12 +8,12 @@ import br.com.saraiva.dao.models.Book;
 
 public interface BookService {
 
-	void gravaLivroNoBanco(BookResponse bookResponse) throws ProdutoJaExisteException;
+	public void gravaLivroNoBanco(BookResponse bookResponse) throws ProdutoJaExisteException;
+	
+	public void removeLivroDoBanco(Integer sku);
 
-	void removeLivroDoBanco(Integer sku);
+	public Book procuraLivroPor(Integer sku);
 
-	Book procuraLivroPor(Integer sku);
-
-	List<Book> procuraLivrosPor(Integer price, Integer limit);
+	public List<Book> procuraLivrosPor(Integer price, Integer limit);
 
 }
